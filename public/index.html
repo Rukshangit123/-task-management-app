@@ -11,9 +11,20 @@
   <body>
     <div class="container py-4">
       <div class="d-flex align-items-center justify-content-between mb-3">
-        <h1 class="mb-0">Task Manager</h1>
         <div>
-          <button class="btn btn-outline-secondary me-2" id="clear-filters"><i class="bi bi-filter"></i> Clear</button>
+          <h1 class="mb-0">Task Manager</h1>
+          <div class="text-muted small">Create and track your daily tasks</div>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <div class="d-flex gap-2 align-items-center">
+            <span class="badge bg-light text-dark" id="count-all">All: 0</span>
+            <span class="badge bg-secondary" id="count-pending">Pending: 0</span>
+            <span class="badge bg-info text-dark" id="count-progress">In Progress: 0</span>
+            <span class="badge bg-success" id="count-completed">Completed: 0</span>
+          </div>
+          <div>
+            <button class="btn btn-outline-secondary me-2" id="clear-filters"><i class="bi bi-filter"></i> Clear</button>
+          </div>
         </div>
       </div>
 
@@ -87,6 +98,18 @@
                 </div>
               </div>
               <div id="tasks-list"></div>
+              <div id="empty-state" class="text-center text-muted mt-4 d-none">
+                <svg width="160" height="120" viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" class="mb-3">
+                  <rect width="160" height="120" rx="12" fill="#f1f3f5" />
+                  <g transform="translate(40,30)">
+                    <rect x="0" y="0" width="80" height="10" rx="3" fill="#e9ecef" />
+                    <rect x="0" y="18" width="60" height="10" rx="3" fill="#e9ecef" />
+                    <rect x="0" y="36" width="40" height="10" rx="3" fill="#e9ecef" />
+                  </g>
+                </svg>
+                <div class="mb-2">No tasks yet</div>
+                <div class="small">Use the form to add your first task.</div>
+              </div>
             </div>
           </div>
         </div>

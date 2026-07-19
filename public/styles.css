@@ -13,3 +13,13 @@ body { background: #f1f3f5; }
 @media (max-width: 767px) {
 	.task-card { margin-bottom: 1rem; }
 }
+
+/* Empty state */
+#empty-state { padding: 2rem 0; }
+
+/* Toast styling override */
+.toast { min-width: 220px; }
+
+/* Priority left border */
+.task-card { border-left: 6px solid transparent; }
+.task-card .badge { font-weight: 600; }
