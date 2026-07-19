@@ -23,4 +23,4 @@ Features
 - Add, edit, delete tasks
 - Set priority, due date, status
 - Filter by priority and status
-- Data persisted in SQLite (`data/tasks.db`)
+- Data persisted in a JSON file (`data/tasks.json`)
