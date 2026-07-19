@@ -11,16 +11,34 @@
   <body>
     <div id="startup-overlay" class="startup-overlay" role="dialog" aria-modal="true" aria-labelledby="startup-title" aria-describedby="startup-desc">
       <div class="startup-box shadow-lg text-center">
-        <h1 id="startup-title" class="mb-2">Welcome to Task Manager</h1>
-        <p id="startup-desc" class="text-muted mb-3">Create, prioritize, and complete tasks with ease.</p>
-        <div class="mb-3">
-          <button id="startup-start" class="btn btn-primary btn-lg me-2">Get Started</button>
-          <button id="startup-demo" class="btn btn-outline-secondary btn-lg">View Demo Tasks</button>
+        <div class="logo-wrap mb-3" aria-hidden="true">
+          <svg class="logo" width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0%" stop-color="#4f46e5"/>
+                <stop offset="100%" stop-color="#06b6d4"/>
+              </linearGradient>
+            </defs>
+            <circle cx="48" cy="48" r="30" fill="url(#g1)" opacity="0.12" />
+            <g class="logo-mark">
+              <circle cx="48" cy="36" r="8" fill="#4f46e5" />
+              <rect x="40" y="48" width="16" height="20" rx="4" fill="#06b6d4" transform="rotate(-8 48 58)" />
+              <circle class="logo-dot" cx="72" cy="24" r="4" fill="#4f46e5" />
+            </g>
+          </svg>
         </div>
-        <div class="form-check">
+        <h1 id="startup-title" class="mb-1">Welcome to Task Manager</h1>
+        <p id="startup-desc" class="text-muted mb-3">Organize your day — add tasks, set priorities, and track progress.</p>
+        <div class="d-flex justify-content-center gap-2 mb-3">
+          <button id="startup-start" class="btn btn-primary btn-lg">Get Started</button>
+          <button id="startup-demo" class="btn btn-outline-secondary btn-lg">Add Demo Tasks</button>
+          <button id="startup-tour" class="btn btn-light btn-lg">Quick Tour</button>
+        </div>
+        <div class="form-check mt-2">
           <input class="form-check-input" type="checkbox" id="startup-hide-check">
           <label class="form-check-label small text-muted" for="startup-hide-check">Don't show this again</label>
         </div>
+        <div class="mt-3 small text-muted">Need help? See the <a href="/README.md" target="_blank">README</a>.</div>
       </div>
     </div>
 
@@ -170,6 +188,38 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
               <button type="button" class="btn btn-danger" id="modal-confirm-delete">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quick Tour Modal -->
+      <div class="modal fade" id="tourModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Quick Tour</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div id="tour-steps">
+                <div class="tour-step" data-step="1">
+                  <h6>1. Add tasks</h6>
+                  <p>Use the form to add a title, description, priority and due date.</p>
+                </div>
+                <div class="tour-step d-none" data-step="2">
+                  <h6>2. Manage status</h6>
+                  <p>Update task status to track progress: Pending, In Progress, or Completed.</p>
+                </div>
+                <div class="tour-step d-none" data-step="3">
+                  <h6>3. Filter & sort</h6>
+                  <p>Filter tasks by priority or status to focus on what's important.</p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="tour-prev">Previous</button>
+              <button type="button" class="btn btn-primary" id="tour-next">Next</button>
             </div>
           </div>
         </div>

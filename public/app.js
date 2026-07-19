@@ -165,6 +165,27 @@ document.addEventListener('DOMContentLoaded', ()=>{
     loadTasks();
     showToast('Demo tasks added');
   });
+  // Quick tour button
+  const tourBtn = document.getElementById('startup-tour');
+  const tourModalEl = document.getElementById('tourModal');
+  const tourModal = new bootstrap.Modal(tourModalEl);
+  let tourStep = 1;
+  function showTourStep(n){
+    const steps = tourModalEl.querySelectorAll('.tour-step');
+    steps.forEach(s=> s.classList.add('d-none'));
+    const current = tourModalEl.querySelector(`.tour-step[data-step="${n}"]`);
+    if (current) current.classList.remove('d-none');
+    tourStep = n;
+    tourModalEl.querySelector('#tour-prev').disabled = (n===1);
+    tourModalEl.querySelector('#tour-next').textContent = (n===steps.length) ? 'Finish' : 'Next';
+  }
+  tourBtn.addEventListener('click', ()=>{ overlay.style.display='none'; tourModal.show(); showTourStep(1); });
+  document.getElementById('tour-next').addEventListener('click', ()=>{
+    const steps = tourModalEl.querySelectorAll('.tour-step');
+    if (tourStep >= steps.length) { tourModal.hide(); showToast('Tour finished'); return; }
+    showTourStep(tourStep+1);
+  });
+  document.getElementById('tour-prev').addEventListener('click', ()=>{ if (tourStep>1) showTourStep(tourStep-1); });
   // allow Escape to close overlay
   document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') overlay.style.display='none'; });
 });
