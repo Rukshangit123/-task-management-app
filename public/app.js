@@ -41,7 +41,9 @@ async function loadTasks(){
 
 function renderTasks(tasks){
   const container = $('#tasks-list');
-  if (!tasks.length) { container.innerHTML = '<p class="text-muted">No tasks yet. Use the form to add one.</p>'; return; }
+  const empty = $('#empty-state');
+  if (!tasks.length) { container.innerHTML = '<p class="text-muted">No tasks yet. Use the form to add one.</p>'; empty.classList.remove('d-none'); updateCounts([], true); return; }
+  empty.classList.add('d-none');
   const rows = tasks.map(t => `
     <div class="card mb-3 task-card">
       <div class="card-body">
@@ -65,6 +67,7 @@ function renderTasks(tasks){
     </div>
   `).join('');
   container.innerHTML = rows;
+  updateCounts(tasks);
 }
 
 function escapeHtml(s){ return (s||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
@@ -77,6 +80,28 @@ function resetForm(){
   $('#due_date').value='';
   $('#status').value='Pending';
   $('#submit-btn').textContent = 'Add Task';
+}
+
+function updateCounts(tasks, empty=false){
+  const all = empty ? 0 : tasks.length;
+  const pending = empty ? 0 : tasks.filter(t=>t.status==='Pending').length;
+  const progress = empty ? 0 : tasks.filter(t=>t.status==='In Progress').length;
+  const completed = empty ? 0 : tasks.filter(t=>t.status==='Completed').length;
+  $('#count-all').textContent = `All: ${all}`;
+  $('#count-pending').textContent = `Pending: ${pending}`;
+  $('#count-progress').textContent = `In Progress: ${progress}`;
+  $('#count-completed').textContent = `Completed: ${completed}`;
+}
+
+function showToast(message, kind='info'){
+  let toastEl = document.getElementById('ui-toast');
+  if(!toastEl){
+    toastEl = document.createElement('div'); toastEl.id='ui-toast'; toastEl.className='toast align-items-center text-bg-primary position-fixed bottom-0 end-0 m-4';
+    toastEl.role='alert'; toastEl.ariaLive='assertive'; toastEl.ariaAtomic='true';
+    toastEl.innerHTML = `<div class="d-flex"><div class="toast-body">${message}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div>`;
+    document.body.appendChild(toastEl);
+  } else { toastEl.querySelector('.toast-body').textContent = message; }
+  const t = new bootstrap.Toast(toastEl, { delay: 2500 }); t.show();
 }
 
 document.addEventListener('submit', async (e)=>{
@@ -98,8 +123,10 @@ document.addEventListener('submit', async (e)=>{
   try{
     if (id) {
       await api.update(id, payload);
+      showToast('Task updated');
     } else {
       await api.create(payload);
+      showToast('Task added');
     }
     resetForm();
     loadTasks();
