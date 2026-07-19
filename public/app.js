@@ -138,6 +138,35 @@ let statusModal, deleteModal;
 document.addEventListener('DOMContentLoaded', ()=>{
   statusModal = new bootstrap.Modal(document.getElementById('statusModal'));
   deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+  // Startup overlay behavior
+  const overlay = document.getElementById('startup-overlay');
+  const startBtn = document.getElementById('startup-start');
+  const demoBtn = document.getElementById('startup-demo');
+  const hideCheck = document.getElementById('startup-hide-check');
+  const hideKey = 'taskmanager.hideSplash';
+  if (localStorage.getItem(hideKey) === '1') {
+    overlay.style.display = 'none';
+  } else {
+    overlay.style.display = 'flex';
+  }
+  startBtn.addEventListener('click', ()=>{
+    if (hideCheck.checked) localStorage.setItem(hideKey,'1');
+    overlay.style.display = 'none';
+  });
+  demoBtn.addEventListener('click', async ()=>{
+    // create a few demo tasks quickly
+    const demoTasks = [
+      { title: 'Buy groceries', description: 'Milk, eggs, bread', priority: 'Medium', due_date: new Date(Date.now()+86400000).toISOString().slice(0,10), status: 'Pending' },
+      { title: 'Team meeting', description: 'Project sync', priority: 'High', due_date: new Date(Date.now()+2*86400000).toISOString().slice(0,10), status: 'In Progress' },
+      { title: 'Read article', description: 'Learn about web accessibility', priority: 'Low', due_date: new Date().toISOString().slice(0,10), status: 'Pending' }
+    ];
+    for (const t of demoTasks){ try { await api.create(t); } catch(e){ /* ignore */ } }
+    overlay.style.display = 'none';
+    loadTasks();
+    showToast('Demo tasks added');
+  });
+  // allow Escape to close overlay
+  document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') overlay.style.display='none'; });
 });
 
 document.addEventListener('click', async (e)=>{

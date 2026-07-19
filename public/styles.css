@@ -23,3 +23,12 @@ body { background: #f1f3f5; }
 /* Priority left border */
 .task-card { border-left: 6px solid transparent; }
 .task-card .badge { font-weight: 600; }
+
+/* Startup overlay */
+.startup-overlay {
+	position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1050;
+	background: linear-gradient(180deg, rgba(15,23,42,0.85), rgba(15,23,42,0.6));
+}
+.startup-box { background: white; padding: 2rem; border-radius: 12px; width: 420px; max-width: calc(100% - 40px); }
+.startup-box h1 { font-size: 1.5rem; }
+.startup-box p { margin-bottom: 1rem; }

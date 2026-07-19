@@ -9,6 +9,21 @@
     <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
+    <div id="startup-overlay" class="startup-overlay" role="dialog" aria-modal="true" aria-labelledby="startup-title" aria-describedby="startup-desc">
+      <div class="startup-box shadow-lg text-center">
+        <h1 id="startup-title" class="mb-2">Welcome to Task Manager</h1>
+        <p id="startup-desc" class="text-muted mb-3">Create, prioritize, and complete tasks with ease.</p>
+        <div class="mb-3">
+          <button id="startup-start" class="btn btn-primary btn-lg me-2">Get Started</button>
+          <button id="startup-demo" class="btn btn-outline-secondary btn-lg">View Demo Tasks</button>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="startup-hide-check">
+          <label class="form-check-label small text-muted" for="startup-hide-check">Don't show this again</label>
+        </div>
+      </div>
+    </div>
+
     <div class="container py-4">
       <div class="d-flex align-items-center justify-content-between mb-3">
         <div>
