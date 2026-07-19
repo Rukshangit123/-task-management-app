@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Task Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="container py-4">
+      <h1 class="mb-3">Task Manager</h1>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <form id="task-form" novalidate>
+            <input type="hidden" id="task-id">
+            <div class="row g-2">
+              <div class="col-md-6">
+                <label class="form-label">Title *</label>
+                <input id="title" class="form-control" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Priority *</label>
+                <select id="priority" class="form-select" required>
+                  <option value="">Select</option>
+                  <option>Low</option>
+                  <option>Medium</option>
+                  <option>High</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Due Date *</label>
+                <input id="due_date" type="date" class="form-control" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Status *</label>
+                <select id="status" class="form-select" required>
+                  <option>Pending</option>
+                  <option>In Progress</option>
+                  <option>Completed</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Description</label>
+                <textarea id="description" class="form-control" rows="2"></textarea>
+              </div>
+              <div class="col-12 text-end">
+                <button class="btn btn-primary mt-2" id="submit-btn">Add Task</button>
+                <button class="btn btn-secondary mt-2" id="reset-btn" type="button">Reset</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="form-label">Filter by Priority</label>
+          <select id="filter-priority" class="form-select">
+            <option value="">All</option>
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Filter by Status</label>
+          <select id="filter-status" class="form-select">
+            <option value="">All</option>
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+          </select>
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <button class="btn btn-outline-secondary ms-auto" id="clear-filters">Clear Filters</button>
+        </div>
+      </div>
+
+      <div id="tasks-list"></div>
+
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
