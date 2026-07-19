@@ -1,2 +1,15 @@
-body { background: #f8f9fa; }
+.bg-app {
+	background: linear-gradient(180deg,#ffffff 0%,#f7f9fb 100%);
+}
+body { background: #f1f3f5; }
 .card h5 { margin: 0; }
+
+.task-card { transition: transform .12s ease, box-shadow .12s ease; }
+.task-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(27,31,35,0.08); }
+
+/* Make badges slightly taller for readability */
+.badge { font-size: 0.85rem; padding: 0.45em 0.6em; }
+
+@media (max-width: 767px) {
+	.task-card { margin-bottom: 1rem; }
+}
